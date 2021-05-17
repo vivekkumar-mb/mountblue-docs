@@ -144,7 +144,7 @@ Hello World!
 Hi this is Vivek!!
 ```
 **3.DOM getElementsByTagName()**</br>
-Accesing Elements By TagName The getElementsByTagName() method returns a collection of all elements in the document with the specified tag name, as an HTMLCollection object. </br>
+Accesing Elements By TagName The `getElementsByTagName()` method returns a collection of all elements in the document with the specified tag name, as an HTMLCollection object. </br>
 
 ### *Example:getElementByTagName()* 
 ``` javascript
