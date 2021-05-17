@@ -78,130 +78,115 @@ To be proficient at accessing elements in the DOM, it is necessary to have a wor
 |ID |#demo |getElementById()
 |Class| .demo |getElementsByClassName()
 |Tag |demo |getElementsByTagName()
-|Selector(single) || querySelector()
-|Selector (all) || querySelectorAll()
+
 
 </br>
 
-### *Example: HTML*
-``` html 
+
+
+## **Some DOM Helper Methods**
+**1.DOM getElementById()**</br>
+Accesing Elements By Id The `getElementById()` method returns the element that has the ID attribute with the specified value.  
+### *Example:getElementById()*
+``` javascript
+<!DOCTYPE html>
 <html>
-<head>
-  <title>getElementById example</title>
-</head>
+
 <body>
-  <p id="para">Some text here</p>
-  <button onclick="changeColor('blue');">blue</button>
+    <p id="demo">This text will be replaced by Hello World.</p>
+    <script>
+        function changeText() {
+            document.getElementById("demo").innerHTML = "Hello World";
+        }
+        changeText();
+    </script>
 </body>
+
+</html>
+``` 
+while calling `changeText()` function the contents of `<p>` tag which has the `id="demo"` will be replaced by `Hello World`. 
+>Output: 
+```
+Hello World
+```   
+</br>
+
+**2.DOM getElementsByClassName()**</br>
+The `getElementsByClassName();` method returns a collection of all elements in the document with the specified class name, as an HTMLCollection object. The HTMLCollection object represents a collection of nodes. The nodes can be accessed by index numbers. The index starts at 0.
+### *Example: getElementsByClassName()*
+``` javascript
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <div class="example">First div element with class="example".</div>
+
+    <div class="example">Second div element with class="example".</div>
+
+    <script>
+        function updateDivs() {
+            var x = document.getElementsByClassName("example");
+            x[0].innerHTML = "Hello World!";
+            x[1].innerHTML = "Hi this is Vivek!!";
+        }
+        updateDivs();
+    </script>
+
+</body>
+
 </html>
 ```
-* Here is an example of the way to get the `id` of the `p` tag and change the color of the content of that `id`, by calling the function `changeColor()`.
-### *Example: getElementById()* 
-
-
-``` javascript 
-function changeColor(newColor) {
-  var elem = document.getElementById('para');
-  elem.style.color = newColor;
-}
+Here we have defined two `<div>` with same `className` Hence, we can access each `<div>` with the help of variable `x` using the concept of indexing. and can update the content of each tags separately. 
+>Output
+``` html
+Hello World!
+Hi this is Vivek!!
 ```
-## **Some JavaScript Helper Methods**
+**3.DOM getElementsByTagName()**</br>
+Accesing Elements By TagName The getElementsByTagName() method returns a collection of all elements in the document with the specified tag name, as an HTMLCollection object. </br>
 
-1. **`every()`** Method: This method is used to check if all elements of an array pass the test that is implemented by the passed higher-order function. What compiler does under the hood is, it iterates over the employees array and check for all employee, if he is a developer or not. As in this case, it should return false.
-
->Input
-
+### *Example:getElementByTagName()* 
 ``` javascript
-const employees = [
-  { name: "Sam",      age: 25, role: "Developer" },
-  { name: "John",     age: 32, role: "Manager"   },
-  { name: "Ronaldo",  age: 29, role: "Architect" },
-  { name: "Perker",   age: 25, role: "Developer" },
-  { name: "Sophia",   age: 38, role: "Director"  },
-  { name: "kristine", age: 21, role: "Developer" },
-];
-  
-function isDeveloper(employee) {
-  return employee.role === "Developer";
-}
-console.log(employees.every(isDeveloper));
-```
+<!DOCTYPE html>
+<html>
 
->Output:
+<body>
+    <p>An ordered list:</p>
+    <ol>
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+    </ol> 
+    <p id="demo"></p>
+    <script>
+        function getItem() {
+            var x = document.getElementsByTagName("LI");
+            document.getElementById("demo").innerHTML = x[1].innerHTML;
+        }
+        getItem();
+    </script>
+</body>
 
-```javascript
-false
-```
+</html>
 
-2. **`fill()`** Method: This method fills the array with a static value. It overrides all array values starting from the first element(0th index) and up to the last element (array.length-1) index.
+``` 
+while calling `getItem()` function ,we are getting collection of `<li>` tags and by accessing it through indexing we can manipulate the content inside each`<li>` tags separately, Here we are updating the content of paragraph with the 2nd index(Tea).
+>output
 
->Input
+  ```
+  An ordered list:
 
-```javascript
-const employees = [
-    { name: "Sam",      age: 25, role: "Developer" },
-    { name: "John",     age: 32, role: "Manager"   },
-    { name: "Ronaldo",  age: 29, role: "Architect" },
-    { name: "Perker",   age: 25, role: "Developer" },
-    { name: "Sophia",   age: 38, role: "Director"  },
-    { name: "kristine", age: 21, role: "Developer" },
-];
-          
-const newEmployees = employees.fill(
-    { name: "Sam", age: 25, role: "Developer" });
-console.log(employees);
-  
-console.log(newEmployees === employees);    // true
-```
-
->Output:
-
-```javascript
-[
- { name: 'Sam', age: 25, role: 'Developer' },
- { name: 'Sam', age: 25, role: 'Developer' },
- { name: 'Sam', age: 25, role: 'Developer' },
- { name: 'Sam', age: 25, role: 'Developer' },
- { name: 'Sam', age: 25, role: 'Developer' },
- { name: 'Sam', age: 25, role: 'Developer' }
-]
-
-true
-```
-
-3. **`filter()`** Method: This method filters the array that passes the test with the function passed to it. It returns a new array.
-
->Input
-
-```javascript
-const employees = [
-    { name: "Sam",      age: 25, role: "Developer" },
-    { name: "John",     age: 32, role: "Manager"   },
-    { name: "Ronaldo",  age: 29, role: "Architect" },
-    { name: "Perker",   age: 25, role: "Developer" },
-    { name: "Sophia",   age: 38, role: "Director"  },
-    { name: "kristine", age: 21, role: "Developer" },
-];
-          
-function filterDevEmp(employee) {
-  return employee.role === "Developer";
-}
-const filteredDevEmployees = employees.filter(filterDevEmp);
-console.log(filteredDevEmployees);
-```
-
->Output:
-
-```javascript
-[
- { name: 'Sam', age: 25, role: 'Developer' },
- { name: 'Perker', age: 25, role: 'Developer' },
- { name: 'kristine', age: 21, role: 'Developer' }
-]
-```
-
+      1.Coffee
+      2.Tea
+      3.Milk
+Tea
+  ```
+    
 >References
 
-1. To Know More about aceessing the DOM Elements [click](https://www.digitalocean.com/community/tutorials/how-to-access-elements-in-the-dom#:~:text=Accessing%20Elements%20by%20ID,method%20of%20the%20document%20object.&text=In%20order%20to%20be%20accessed,must%20have%20an%20id%20attribute.)
+1. what is [DOM](https://www.youtube.com/watch?v=ipkjfvl40s0&t=109s)?
 2. CheckOut [this](https://www.geeksforgeeks.org/dom-document-object-model/) Amazing Article About DOM, on geekforgeeks.
-3. Some More Resource for JavaScript [Helper Methods](https://www.geeksforgeeks.org/javascript-helper-methods/)
+
+3. To Know More about aceessing the DOM Elements [click](https://www.digitalocean.com/community/tutorials/how-to-access-elements-in-the-dom#:~:text=Accessing%20Elements%20by%20ID,method%20of%20the%20document%20object.&text=In%20order%20to%20be%20accessed,must%20have%20an%20id%20attribute.)
+4. Some [More](https://www.youtube.com/watch?v=y17RuWkWdn8) DOM Manipulation.
